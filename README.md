@@ -7,8 +7,13 @@ It also extracts the MySQL `KEY xxxxx` from the CREATE block and create them in 
 Awk is chosen because it's fast and portable. You can use gawk, original awk or even the lightning fast mawk.
 The mysqldump file is traversed only once.
 
+### Installation (through [Homebrew](http://mxcl.github.io/homebrew/))
+    
+    $ brew tap mrded/mysql2sqlite
+    $ brew install mysql2sqlite
+
 ### Usage
-`$ ./mysql2sqlite mysqldump-opts db-name | sqlite3 database.sqlite`
+    $ mysql2sqlite mysqldump-opts db-name | sqlite3 database.sqlite
 
 ### Example:
-`$ ./mysql2sqlite --no-data -u root -pMySecretPassWord myDbase | sqlite3 database.sqlite`
+    $ mysql2sqlite --no-data -u root -pMySecretPassWord myDbase | sqlite3 database.sqlite
