@@ -10,7 +10,7 @@ The mysqldump file is traversed only once.
 ### Installation (through [Homebrew](http://mxcl.github.io/homebrew/))
     
     $ brew tap mrded/mysql2sqlite
-    $ brew install mysql2sqlite
+    $ brew install mysql2sqlite --HEAD
 
 ### Usage
     $ mysql2sqlite mysqldump-opts db-name | sqlite3 database.sqlite
