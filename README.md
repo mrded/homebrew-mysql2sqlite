@@ -1,4 +1,4 @@
-mysql2sqlite
+[Homebrew](http://mxcl.github.io/homebrew/) mysql2sqlite
 ============
 
 Converts a mysqldump file into a Sqlite 3 compatible file.
@@ -7,7 +7,7 @@ It also extracts the MySQL `KEY xxxxx` from the CREATE block and create them in 
 Awk is chosen because it's fast and portable. You can use gawk, original awk or even the lightning fast mawk.
 The mysqldump file is traversed only once.
 
-### Installation (through [Homebrew](http://mxcl.github.io/homebrew/))
+### Installation
     
     $ brew tap mrded/mysql2sqlite
     $ brew install mysql2sqlite --HEAD
