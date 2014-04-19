@@ -61,16 +61,23 @@ inTrigger != 0 { print; next }
 # Get rid of field lengths in KEY lines
 / KEY/ { gsub(/\([0-9]+\)/, "") }
 
+# Get rid of primary key and constraints
+/ PRIMARY KEY/ || /  CONSTRAINT/{next}
+
 # Print all fields definition lines except the `KEY` lines.
 /^  / && !/^(  KEY|\);)/ {
-	gsub( /AUTO_INCREMENT|auto_increment/, "" )
+	gsub(/" [^ ]*(INT|int)[^ ]*/, "\" integer")
+	if( match($0,/AUTO_INCREMENT|auto_increment/)) {
+		gsub(/int\([0-9]+\)/, "integer")
+		gsub( /NOT NULL AUTO_INCREMENT|not null auto_increment/, "primary key autoincrement" )
+	}
 	gsub( /(CHARACTER SET|character set) [^ ]+ /, "" )
 	gsub( /DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP|default current_timestamp on update current_timestamp/, "" )
 	gsub( /(COLLATE|collate) [^ ]+ /, "" )
 	gsub(/(ENUM|enum)[^)]+\)/, "text ")
 	gsub(/(SET|set)\([^)]+\)/, "text ")
 	gsub(/UNSIGNED|unsigned/, "")
-	gsub(/" [^ ]*(INT|int)[^ ]*/, "\" integer")
+	gsub(/COMMENT \047.+\047/,"")
 	if (prev) print prev ","
 	prev = $1
 }
